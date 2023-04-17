@@ -1,0 +1,11 @@
+extends Node
+
+# LootLocker Signals
+signal AuthenticationWithLootLockerSucceeded
+signal DoneGettingPlayersVisitedCount
+signal SavePlayerDataCompleted
+signal SessionCreated
+signal GetPlayerDataCompleted
+signal GetLeaderboardsCompleted
+signal UploadingScoreCompleted
+signal SavePlayerNameCompleted

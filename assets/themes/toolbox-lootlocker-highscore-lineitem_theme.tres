@@ -1,0 +1,15 @@
+[gd_resource type="Theme" load_steps=4 format=2]
+
+[ext_resource path="res://assets/fonts/montreal/Montreal-Bold.ttf" type="DynamicFontData" id=1]
+[ext_resource path="res://assets/themes/toolbox-lootlocker-highscore-lineitem_background-theme.tres" type="StyleBox" id=2]
+
+[sub_resource type="DynamicFont" id=2]
+resource_local_to_scene = true
+font_data = ExtResource( 1 )
+
+[resource]
+LineEdit/colors/font_color_uneditable = Color( 1, 1, 1, 1 )
+LineEdit/fonts/font = SubResource( 2 )
+LineEdit/styles/focus = ExtResource( 2 )
+LineEdit/styles/normal = ExtResource( 2 )
+LineEdit/styles/read_only = ExtResource( 2 )

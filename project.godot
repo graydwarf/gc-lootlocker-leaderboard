@@ -1,0 +1,49 @@
+; Engine configuration file.
+; It's best edited using the editor UI and not directly,
+; since the parameters that go here are not all obvious.
+;
+; Format:
+;   [section] ; section goes between []
+;   param=value ; assign values to parameters
+
+config_version=4
+
+_global_script_classes=[ {
+"base": "Node",
+"class": "BadWords",
+"language": "GDScript",
+"path": "res://scenes/bad-words.gd"
+} ]
+_global_script_class_icons={
+"BadWords": ""
+}
+
+[application]
+
+config/name="gc-lootlocker-leaderboard"
+run/main_scene="res://scenes/highscore.tscn"
+
+[autoload]
+
+Signals="*res://singletons/project/signals.gd"
+Common="*res://singletons/common/common.gd"
+HttpHelper="*res://singletons/common/http-helper.gd"
+Leaderboard="*res://singletons/common/lootlocker/leaderboard-helper.gd"
+LootLocker="*res://singletons/common/lootlocker/lootlocker-helper.gd"
+
+[debug]
+
+gdscript/warnings/unused_signal=false
+gdscript/warnings/return_value_discarded=false
+
+[gui]
+
+common/drop_mouse_on_gui_input_disabled=true
+
+[physics]
+
+common/enable_pause_aware_picking=true
+
+[rendering]
+
+environment/default_environment="res://default_env.tres"

@@ -1,0 +1,165 @@
+[gd_scene load_steps=13 format=2]
+
+[ext_resource path="res://assets/fonts/montreal/Montreal-Bold.ttf" type="DynamicFontData" id=1]
+[ext_resource path="res://assets/themes/titlebar.tres" type="Theme" id=2]
+[ext_resource path="res://scenes/highscore.gd" type="Script" id=3]
+[ext_resource path="res://assets/fonts/montreal/Montreal.tres" type="DynamicFont" id=4]
+[ext_resource path="res://assets/toolbox/busy-icon.png" type="Texture" id=5]
+
+[sub_resource type="DynamicFont" id=4]
+resource_local_to_scene = true
+size = 14
+use_filter = true
+font_data = ExtResource( 1 )
+
+[sub_resource type="DynamicFont" id=3]
+resource_local_to_scene = true
+size = 18
+use_filter = true
+font_data = ExtResource( 1 )
+
+[sub_resource type="Theme" id=5]
+default_font = SubResource( 3 )
+Label/fonts/font = SubResource( 4 )
+
+[sub_resource type="DynamicFont" id=6]
+resource_local_to_scene = true
+size = 18
+use_filter = true
+font_data = ExtResource( 1 )
+
+[sub_resource type="Theme" id=7]
+default_font = SubResource( 3 )
+Label/fonts/font = SubResource( 6 )
+
+[sub_resource type="Animation" id=8]
+length = 0.001
+tracks/0/type = "value"
+tracks/0/path = NodePath("LoadingAnimationSprite:rotation_degrees")
+tracks/0/interp = 1
+tracks/0/loop_wrap = true
+tracks/0/imported = false
+tracks/0/enabled = true
+tracks/0/keys = {
+"times": PoolRealArray( 0 ),
+"transitions": PoolRealArray( 1 ),
+"update": 0,
+"values": [ 0.0 ]
+}
+
+[sub_resource type="Animation" id=9]
+resource_name = "Spin"
+loop = true
+tracks/0/type = "value"
+tracks/0/path = NodePath("LoadingAnimationSprite:rotation_degrees")
+tracks/0/interp = 1
+tracks/0/loop_wrap = true
+tracks/0/imported = false
+tracks/0/enabled = true
+tracks/0/keys = {
+"times": PoolRealArray( 0, 1 ),
+"transitions": PoolRealArray( 1, 1 ),
+"update": 0,
+"values": [ 0.0, 360.0 ]
+}
+
+[node name="Highscore" type="ColorRect"]
+anchor_right = 1.0
+anchor_bottom = 1.0
+size_flags_horizontal = 3
+size_flags_vertical = 3
+theme = ExtResource( 2 )
+color = Color( 0, 0, 0, 1 )
+script = ExtResource( 3 )
+
+[node name="InstructionLabel" type="Label" parent="."]
+margin_left = 9.0
+margin_top = 116.0
+margin_right = 363.0
+margin_bottom = 311.0
+theme = SubResource( 5 )
+text = "- In order for the demo to work: 
+- you must have a LootLocker account.
+- you must create a Leaderboard and paste the leaderboard key in code.
+- you must get your game API key from LootLocker -> Settings -> API Keys. You may need to create a new one for this example. Copy/paste it into the placeholder.
+- You may need to enable an appropriate platform on LootLocker. See Settings -> Platforms -> Guest Login. 
+
+Usage:
+- Submit initials to add random highscore. 
+- Naughty word checking is included. Let me know if you manage to sneak anything by it."
+valign = 1
+autowrap = true
+
+[node name="ErrorLabel" type="Label" parent="."]
+self_modulate = Color( 1, 0, 0, 1 )
+margin_left = 15.0
+margin_top = 41.0
+margin_right = 318.0
+margin_bottom = 89.0
+theme = SubResource( 5 )
+valign = 1
+__meta__ = {
+"_edit_use_anchors_": false
+}
+
+[node name="InitialsInstructionLabel" type="Label" parent="."]
+margin_left = 16.0
+margin_top = 18.0
+margin_right = 87.0
+margin_bottom = 49.0
+text = "Initials:
+"
+align = 1
+valign = 1
+
+[node name="TitleLabel" type="Label" parent="."]
+margin_left = 526.0
+margin_top = 69.0
+margin_right = 829.0
+margin_bottom = 100.0
+theme = ExtResource( 2 )
+text = "Highscores"
+align = 1
+valign = 1
+
+[node name="SubmitHighscoreButton" type="Button" parent="."]
+margin_left = 191.0
+margin_top = 8.0
+margin_right = 337.0
+margin_bottom = 47.0
+text = "Add Highscore"
+
+[node name="ScrollContainer" type="ScrollContainer" parent="."]
+margin_left = 404.0
+margin_top = 110.0
+margin_right = 958.0
+margin_bottom = 536.0
+size_flags_horizontal = 3
+size_flags_vertical = 3
+
+[node name="LeaderboardVBoxContainer" type="VBoxContainer" parent="ScrollContainer"]
+margin_right = 554.0
+margin_bottom = 426.0
+size_flags_horizontal = 3
+size_flags_vertical = 3
+
+[node name="InitialsLineEdit" type="LineEdit" parent="."]
+margin_left = 96.0
+margin_top = 7.0
+margin_right = 179.0
+margin_bottom = 48.0
+theme = SubResource( 7 )
+custom_fonts/font = ExtResource( 4 )
+align = 1
+max_length = 3
+context_menu_enabled = false
+
+[node name="LoadingAnimationSprite" type="Sprite" parent="."]
+position = Vector2( 676, 309 )
+texture = ExtResource( 5 )
+
+[node name="LoadingAnimationPlayer" type="AnimationPlayer" parent="."]
+anims/RESET = SubResource( 8 )
+anims/Spin = SubResource( 9 )
+
+[connection signal="pressed" from="SubmitHighscoreButton" to="." method="_on_SubmitHighscoreButton_pressed"]
