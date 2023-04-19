@@ -12,6 +12,8 @@ extends ColorRect
 # concerned about people posting fake highscores, this implementation should meet 
 # your testing/early access needs.
 
+# https://ref.lootlocker.com/game-api/#leaderboards
+
 onready var _loadingAnimationPlayer = $LoadingAnimationPlayer
 onready var _loadingAnimationSprite = $LoadingAnimationSprite
 onready var _leaderboardContainer = $ScrollContainer/LeaderboardVBoxContainer
@@ -40,6 +42,12 @@ func InitSignals():
 	Signals.connect("UploadingScoreCompleted", self, "UploadingScoreCompleted")
 	Signals.connect("SavePlayerNameCompleted", self, "SavePlayerNameCompleted")
 
+# Detect app closing via X or alt+f4
+func _notification(notificationType):
+	if notificationType == MainLoop.NOTIFICATION_WM_QUIT_REQUEST:
+		LootLocker.EndSession()
+		get_tree().quit()
+		
 func AuthenticationWithLootLockerSucceeded():
 	Leaderboard.SetLeaderboardKey(_leaderboardKey)
 	Leaderboard.GetLeaderboards(10)

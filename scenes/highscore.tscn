@@ -83,6 +83,7 @@ text = "- In order for the demo to work:
 - you must create a Leaderboard and paste the leaderboard key in code.
 - you must get your game API key from LootLocker -> Settings -> API Keys. You may need to create a new one for this example. Copy/paste it into the placeholder.
 - You may need to enable an appropriate platform on LootLocker. See Settings -> Platforms -> Guest Login. 
+- If nothing but spinner, see Output for help.
 
 Usage:
 - Submit initials to add random highscore. 

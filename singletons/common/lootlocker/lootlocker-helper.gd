@@ -12,6 +12,11 @@ var _developmentMode = true
 var _playerId = ""
 var _gameVersion = "0.0.0.1"
 
+# Set and cleaned up automatically. Separated
+# to support simultaneous requests.
+var _loginHttpRequest
+var _endSessionHttpRequest
+
 func _ready():
 	Signals.connect("SessionCreated", self, "SessionCreated")
 
@@ -33,6 +38,23 @@ func SetGameApiKey(value : String):
 func SetDevelopmentMode(value : bool):
 	_developmentMode = value
 
+func CreateHttpRequest():
+	var httpRequest = HTTPRequest.new()
+	add_child(httpRequest)
+	return httpRequest
+	
+# Good practice to end sessions (for security) but
+# also so your session metrics are more accurate in
+# LootLocker
+func EndSession():
+	var url = "https://api.lootlocker.io/game/v1/session/end"
+	var method = HTTPClient.METHOD_POST
+	var headers = ["x-session-token: " + _sessionToken]
+
+	# Note: No event handler because we exit and don't wait for response 
+	_endSessionHttpRequest = CreateHttpRequest()
+	_endSessionHttpRequest.request(url, headers, true, method)
+	
 func LoadLocalPlayerData():
 	var file : File = File.new()
 	var playerData = []
@@ -84,3 +106,5 @@ func _on_auth_request_completed(_result, _response_code, _headers, body):
 	SessionCreated(json.result.session_token)
 	
 	Signals.emit_signal("AuthenticationWithLootLockerSucceeded")
+
+		
